@@ -8,9 +8,8 @@ environment:
 
 # Add regular dependencies here.
 dependencies:
-  uuid:
-  path_provider:
-  # path: ^1.8.0
+  uuid: ^4.5.1
+  path_provider: ^2.1.5
 
 dev_dependencies:
   lints: ^5.0.0
