@@ -18,8 +18,6 @@ Add the following to your `pubspec.yaml` file:
 ```yaml
 dependencies:
   json_store: ^1.0.0 # Use the latest version
-  path_provider: ^2.0.0 # Required for getting application documents directory
-  uuid: ^4.0.0 # Required for generating unique IDs
 ```
 
 Then, run `dart pub get` in your project.
@@ -28,15 +26,22 @@ Then, run `dart pub get` in your project.
 
 ### Getting the Instance
 
-First, get the singleton instance of `JsonStore`:
+
+First make sure to add `WidgetsFlutterBinding.ensureInitialized();` before run your app.
 
 ```dart
 import 'package:json_store/json_store.dart';
 
-Future<void> main() async {
-  final jsonStore = await JsonStore.instance();
-  // Your database operations go here
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();  // Required for path_provider
+    runApp(MyApp());
 }
+```
+
+### First, get the singleton instance of `JsonStore`:
+
+```dart
+final jsonstore = await JsonStore.instance();
 ```
 
 ### Adding Data
@@ -46,7 +51,7 @@ You can add documents to a collection. If you don't specify an ID, a new one wil
 ```dart
 // Add a new document to the 'users' collection with an auto-generated ID
 final newUserRef = await jsonStore.collection('users').add({
-  'name': 'Alice',
+  'name': 'Ali',
   'age': 30,
 });
 print('Added new user with ID: ${newUserRef.id}');
